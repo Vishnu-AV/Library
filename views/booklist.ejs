@@ -1,0 +1,83 @@
+<div>
+    <h1 class="text-center">
+        <%= title %>
+    </h1>
+    <a href="/createbook" style="float: right;" class="add-button float-right">Add new book</a>
+</div>
+<div class="book-content">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">id</th>
+                <th scope="col">name</th>
+                <th scope="col">rate</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <% books.forEach(function(book, i) { %>
+
+            <tbody>
+                <tr>
+                    <th scope="row">
+                        <%= i+1 %>
+                    </th>
+                    <td id="book-id">
+                        <%= book.id %>
+                    </td>
+                    <td>
+                        <%= book.name %>
+                    </td>
+                    <td>
+                        <%= book.rate %>
+                    </td>
+                    <td> <a href=""> <button id="del-btn" class="btn btn-danger">Delete</button></a>
+                    </td>
+                </tr>
+            </tbody>
+
+            <% }); %>
+
+    </table>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $('#del-btn').on('click', function () {
+            var bid = document.getElementById('book-id').innerHTML;
+            alert(bid);
+            $.ajax({
+                method: "POST",
+                url: "/removebook?id=" + bid,
+                data: { "id": bid },
+                success: function (result) {
+                    // if (/* check if it is ok */) {
+                    location.reload();
+                    // }
+                }
+            })
+        });
+
+
+    });
+
+    var del_btn = document.getElementById("del-btn");
+    del_btn.addEventListener("click", function (e) {
+        var bid = document.getElementById('book-id').innerHTML;
+        var b_id = JSON.stringify(bid);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/books/" + bid);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                console.log(xhr.responseText);
+                window.location.href = "/books";
+            }
+        };
+        xhr.send();
+
+
+        //make XMLHttpRequest to delete the poll here
+    }, false);
+</script>
