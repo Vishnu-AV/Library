@@ -1,4 +1,3 @@
-let Person = require('../model/person');
 var Book = require('../model/book');
 
 exports.getBooks = function () {
@@ -15,10 +14,7 @@ exports.getBooks = function () {
 
 exports.addBooks = function (req, res) {
     return new Promise(async (resolve, reject) => {
-        const book = new Book({
-            name: req.name,
-            rate: req.rate
-        });
+        const book = new Book(req.body);
         await book.save()
             .then(wallet => {
                 // req.flash('success_msg', 'New book added');
@@ -33,14 +29,17 @@ exports.addBooks = function (req, res) {
 
 exports.removebook = function (req, res) {
     return new Promise(async (resolve, reject) => {
-        Book.remove({
-            _id: req,
+        Book.deleteOne({
+            _id: req.params.id,
         }, function (err, user) {
-            if (err)
+            if (err) {
                 return console.error(err);
+            } else {
+                console.log('User successfully removed from polls collection!');
+                res.redirect("/books");
+                res.status(200).send();
 
-            console.log('User successfully removed from polls collection!');
-            res.status(200).send();
+            }
 
 
         });

@@ -16,7 +16,11 @@ const BookSchema = new mongoose.Schema({
     name: {
         type: String,
         default: ''
-    }  
+    },
+    author: {
+        type: String,
+        default: ''
+    }
 })
 
 const Book = mongoose.model('Book', BookSchema);

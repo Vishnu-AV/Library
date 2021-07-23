@@ -1,0 +1,28 @@
+<div class="container">
+    <h1>Edit Member</h1>
+    <form action="/members/update/<%= member._id%>" method="post">
+        <table>
+            <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" name="name" value="<%= member.name %>" /></td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td><textarea name="address"><%= member.address %></textarea></td>
+                </tr>
+                <tr>
+                    <td>Position</td>
+                    <td><input type="text" name="position" value="<%= member.position %>" /></td>
+                </tr>
+                <tr>
+                    <td>Salary</td>
+                    <td><input type="number" name="salary" value="<%= member.salary %>" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button type="submit">Update</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

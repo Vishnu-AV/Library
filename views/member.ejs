@@ -1,0 +1,31 @@
+<div class="container">
+  <h1 class="text-center">Member List</h1>
+  <h3><a style="float: right" class="add-button" href="/members/create">Create Member</a></h3>
+  <div class="text-center">
+    <% if(members.length>0) { %>
+      <table class="list-table">
+        <thead>
+          <tr>
+            <th>Member Name</th>
+            <th>Position</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <% for(var i=0; i<members.length;i++) { %>
+            <tr>
+              <td><a href="/members/show/<%= members[i]._id%>">
+                  <%= members[i].name%>
+                </a></td>
+              <td>
+                <%= members[i].position%>
+              </td>
+            </tr>
+            <% } %>
+        </tbody>
+      </table>
+      <% } else { %>
+        <div>No members found.</div>
+        <% } %>
+  </div>
+</div>

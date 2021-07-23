@@ -10,8 +10,8 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">id</th>
                 <th scope="col">name</th>
+                <th scope="col">author</th>
                 <th scope="col">rate</th>
                 <th scope="col"></th>
             </tr>
@@ -23,16 +23,20 @@
                     <th scope="row">
                         <%= i+1 %>
                     </th>
-                    <td id="book-id">
-                        <%= book.id %>
-                    </td>
                     <td>
                         <%= book.name %>
                     </td>
                     <td>
+                        <%= book.author %>
+                    </td>
+                    <td>
                         <%= book.rate %>
                     </td>
-                    <td> <a href=""> <button id="del-btn" class="btn btn-danger">Delete</button></a>
+                    <td>
+                        <!-- <a href=""> <button id="del-btn" class="btn btn-danger">Delete</button></a> -->
+                        <form action="/removebook/<%= book.id%>" method="post">
+                            <button class="btn btn-danger" type="submit">DELETE</button>
+                        </form>
                     </td>
                 </tr>
             </tbody>
